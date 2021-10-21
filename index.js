@@ -8,14 +8,14 @@ instaNameLogo.src =
 instaLogo.src =
   'https://www.instagram.com/static/images/homepage/home-phones.png/43cc71bb1b43.png';
 
-function creetDivElement() {
+function createDivElement() {
   let div = document.createElement('div');
   return div;
 }
-const firstDivInWrapper = creetDivElement();
-const secondDivInWrapper = creetDivElement();
-const divInForm = creetDivElement();
-const wrapper = creetDivElement();
+const firstDivInWrapper = createDivElement();
+const secondDivInWrapper = createDivElement();
+const divInForm = createDivElement();
+const wrapper = createDivElement();
 
 function createInput() {
   const input = document.createElement('input');
