@@ -1,7 +1,23 @@
-const root = document.getElementById('root');
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.getElementById('root');
+  const mainPaige = createMainSection();
+
+  mainPaige.render();
+});
 
 function createMainSection() {
   const mainSection = document.createElement('section');
+
+  const wrapper = document.createElement('div');
+
+  wrapper.appendChild(createIPhoneBlock());
+
+  wrapper.appendChild(createAuthorizationSection());
+
+  mainSection.appendChild(wrapper);
+
+  wrapper.classList.add('wrapper');
+
   mainSection.classList.add('main_section');
 
   function createCaruselBlock() {
@@ -18,6 +34,23 @@ function createMainSection() {
       img.classList.add('carusel_block');
       div.appendChild(img);
     });
+
+    const imageArray = div.querySelectorAll('img');
+
+    imageArray[3].classList.add('visible');
+
+    let index = 3;
+    let inteval = setInterval(() => {
+      index++;
+      imageArray.forEach((el) => {
+        el.classList.remove('visible');
+      });
+      if (index >= imageArray.length) {
+        index = 0;
+      }
+
+      imageArray[index].classList.add('visible');
+    }, 2000);
 
     return div;
   }
@@ -46,29 +79,27 @@ function createMainSection() {
     return img;
   }
 
-  const authorizationContainer = document.createElement('div');
+  function createAuthorizationSection() {
+    const authorizationContainer = document.createElement('div');
+    const divInAuthorizationContainre = document.createElement('div');
+    const instaDivHeadingName = document.createElement('div');
+    const instaHeadingName = document.createElement('h1');
+    instaHeadingName.innerText = 'Instagram';
 
-  const divInAuthorizationContainre = document.createElement('div');
+    authorizationContainer.appendChild(divInAuthorizationContainre);
 
-  const instaDivHeadingName = document.createElement('div');
+    divInAuthorizationContainre.appendChild(instaDivHeadingName);
 
-  const instaHeadingName = document.createElement('h1');
+    divInAuthorizationContainre.classList.add('authorization_form');
 
-  instaHeadingName.innerText = 'Instagram';
+    instaDivHeadingName.appendChild(instaHeadingName);
 
-  authorizationContainer.appendChild(divInAuthorizationContainre);
+    authorizationContainer.classList.add('second_div');
 
-  divInAuthorizationContainre.appendChild(instaDivHeadingName);
+    divInAuthorizationContainre.appendChild(createSignInForm());
 
-  divInAuthorizationContainre.classList.add('authorization_form');
-
-  instaDivHeadingName.appendChild(instaHeadingName);
-
-  authorizationContainer.classList.add('second_div');
-
-  const wrapper = document.createElement('div');
-
-  wrapper.classList.add('wrapper');
+    return authorizationContainer;
+  }
 
   //
   function createSignInFormInput(inputObject) {
@@ -128,12 +159,29 @@ function createMainSection() {
 
     return signInForm;
   }
-  mainSection.appendChild(wrapper);
-  wrapper.appendChild(createIPhoneBlock());
-  wrapper.appendChild(authorizationContainer);
-  divInAuthorizationContainre.appendChild(createSignInForm());
 
-  return mainSection;
+  function createFooter() {
+    const footer = document.createElement('footer');
+    const footerText = document.createElement('a');
+    footerText.href = 'https://github.com/VasylSavchecnko/insta_like';
+    let now = new Date();
+
+    footerText.innerText = `\u00A9 by Vasyl, ${now.getFullYear()}`;
+    footer.appendChild(footerText);
+
+    return footer;
+  }
+
+  return {
+    render: function render() {
+      root.appendChild(mainSection);
+      root.appendChild(createFooter());
+    },
+    remove: function remuve() {
+      root.innerHTML = '';
+    },
+    claer: function clear(interval) {
+      return clearInterval(interval);
+    },
+  };
 }
-
-root.appendChild(createMainSection());
