@@ -2,11 +2,13 @@ import { createIPhoneBlock } from './iphone_block';
 import { createAuthorizationSection } from './createSingForm';
 import { createFooter } from './footer';
 import { createElement } from './utils';
+export let interval;
 export function createMainSection() {
   const wrapper = createElement('div', { class: 'wrapper' }, [
     createIPhoneBlock(),
     createAuthorizationSection(),
   ]);
+
   const mainSection = createElement('section', { class: 'main_section' }, [
     wrapper,
   ]);
@@ -18,6 +20,9 @@ export function createMainSection() {
     },
     remuve() {
       root.innerHTML = '';
+    },
+    stop() {
+      clearInterval(interval);
     },
   };
 }

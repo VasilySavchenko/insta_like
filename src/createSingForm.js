@@ -1,4 +1,5 @@
 import { createElement } from './utils';
+import { root } from '.';
 export function createAuthorizationSection() {
   const instaHeadingName = createElement('h1');
   const instaDivHeadingName = createElement('div', {}, [instaHeadingName]);
@@ -60,11 +61,13 @@ function createSignInForm() {
       'input[type=email], input[type=password]'
     );
     const values = {};
+    if (typeof Object.keys(values) != 'undefined') {
+      root.innerHTML = '';
+    }
 
     fields.forEach((field) => {
       values[field.name] = field.value;
     });
-    console.log(values);
   });
 
   signInForm.appendChild(emailInput);

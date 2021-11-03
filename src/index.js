@@ -1,9 +1,6 @@
-import { createCaruselBlock } from './createCarusel';
 import { createMainSection } from './creatMainSection';
-
+export const root = document.getElementById('root');
 document.addEventListener('DOMContentLoaded', () => {
-  const root = document.getElementById('root');
-
   const mainPaige = createMainSection();
 
   mainPaige.render();
